@@ -1,0 +1,46 @@
+<script>
+  $('#cancel-add-new-subject-btn').bind('click', function(e) {
+    $('#new-subject-modal').removeClass('is-active')
+  })
+  $('#close-add-new-subject-modal-btn').bind('click', function(e) {
+    $('#new-subject-modal').removeClass('is-active')
+  })
+  $('#submit-add-new-subject-btn').bind('click', function(e) {
+    addNewSubjectToDatatable()
+  })
+  function getDataFromNewSubjectModal() {
+    const data = {}
+    data.maHP = $(`[title = 'maHP']`).val()
+    data.maIn = $(`[title = 'maIn']`).val()
+    data.tenHP = $(`[title = 'tenHP']`).val()
+    data.hocKy = $(`[title = 'hocKy']`).val()
+    data.soTinChi = $(`[title = 'soTinChi']`).val()
+    data.tbKtraTX = $(`[title = 'tbKtraTX']`).val()
+    data.diemThi = $(`[title = 'diemThi']`).val()
+    data.diemTB = $(`[title = 'diemTB']`).val()
+    return data
+  }
+  function callApiAddNewSubject(data) {
+    $.ajax({
+      url: '/api/subject',
+      type: 'POST',
+      cache: true,
+      processData: false,
+      dataType: 'json',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(data),
+      success: function(response) {
+        $('#close-add-new-subject-modal-btn').click()
+        setTimeout(alertSuccessTask(response.message), 1500)
+        setTimeout(() => location.reload(), 1500)
+      },
+      error: function(error) {
+        alertFailureTask(error)
+      }
+    })
+  }
+  function addNewSubjectToDatatable() {
+    const data = getDataFromNewSubjectModal()
+    callApiAddNewSubject(data)
+  }
+</script>

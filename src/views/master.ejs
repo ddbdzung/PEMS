@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/lib/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="/style/style.css">
+    <%- include('./components/include.ejs') %>
+</head>
+
+<body>
+<!-- -------------------- Start 'New Subject Modal' ---------------------------------------------- -->
+    <%- include ('./components/new_subject_modal.ejs') %>
+    <%- include ('./scripts/new_subject_modal.ejs') %>
+<!-- -------------------- End 'New Subject Modal' ---------------------------------------------- -->
+
+<!-- -------------------- Start 'DataTable' ---------------------------------------------- -->
+    <%- include ('./pages/datatable.ejs') %>
+    <script src="/scripts/master.js"></script>
+<!-- -------------------- End 'DataTable' ---------------------------------------------- -->
+
+<!-- -------------------- Start 'Config Buttons Master' ---------------------------------------------- -->
+    <%- include ('./components/config_button_master.ejs') %>
+    <%- include ('./scripts/config_button_master.ejs') %>
+<!-- -------------------- End 'Config Buttons Master' ---------------------------------------------- -->
+
+</body>
+
+</html>

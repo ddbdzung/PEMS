@@ -1,0 +1,1 @@
+- Filter not working properly with the float point type.

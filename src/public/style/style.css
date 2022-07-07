@@ -1,0 +1,22 @@
+.table td {
+  vertical-align: middle;
+}
+
+.table th {
+  vertical-align: middle;
+}
+
+.alertify-notifier .ajs-success {
+  color: whitesmoke;
+}
+
+.alertify-notifier .ajs-message {
+  background-color: rgb(2, 157, 224);
+  color: whitesmoke;
+}
+
+
+.dataTables_info,
+.dataTables_paginate {
+  margin-top: 12px;
+}
