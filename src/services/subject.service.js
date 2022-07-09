@@ -47,7 +47,20 @@ const getValueScore = (alphabeticalScore) => {
   }
 }
 
+const getSubjectById = async (id) => {
+  const subject = await Subject.findById(id)
+  let data = {}
+  Object.assign(data, subject)
+  data._doc.diemChu = getAlphabeticalScore(subject)
+  delete data._doc._id
+  delete data._doc.createdAt
+  delete data._doc.updatedAt
+  delete data._doc.__v
+  return data._doc
+}
+
 module.exports = {
   getAlphabeticalScore,
   getValueScore,
+  getSubjectById,
 }
