@@ -1,97 +1,96 @@
 <div class="container is-widescreen">
-  <table class="table is-striped mb-2" id="main-table" class="display">
-      <thead>
-          <tr>
-              <th>STT</th>
-              <th>Mã HP</th>
-              <th>Mã in</th>
-              <th>Tên học phần</th>
-              <th>Học kỳ</th>
-              <th>Số tín chỉ</th>
-              <th>TBKTTX</th>
-              <th>Điểm thi</th>
-              <th>Điểm TB</th>
-              <th>Hành động</th>
-          </tr>
-      </thead>
-      <tbody>
-          <% data.forEach((subject, index)=> { %>
-              <tr data-row-id="<%= subject._id %>">
-                  <td>
-                      <%= (index+1) %>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="maHP" class="input is-info is-small" type="hidden"
-                          value="<%= subject.maHP %>">
-                      <span>
-                          <%= subject.maHP %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="maIn" class="input is-info is-small" type="hidden"
-                          value="<%= subject.maIn %>">
-                      <span>
-                          <%= subject.maIn %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="tenHP" class="input is-info is-small" type="hidden"
-                          value="<%= subject.tenHP %>">
-                      <span>
-                          <%= subject.tenHP %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="hocKy" class="input is-info is-small" type="hidden"
-                          value="<%= subject.hocKy %>">
-                      <span>
-                          <%= subject.hocKy %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="soTinChi" class="input is-info is-small" type="hidden"
-                          value="<%= subject.soTinChi %>">
-                      <span>
-                          <%= subject.soTinChi %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="tbKtraTX" class="input is-info is-small" type="hidden"
-                          value="<%= subject.tbKtraTX %>">
-                      <span>
-                          <%= subject.tbKtraTX %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="diemThi" class="input is-info is-small" type="hidden"
-                          value="<%= subject.diemThi %>">
-                      <span>
-                          <%= subject.diemThi %>
-                      </span>
-                  </td>
-                  <td data-id="<%= subject._id %>">
-                      <input title="diemTB" class="input is-info is-small" type="hidden"
-                          value="<%= subject.diemTB %>">
-                      <span>
-                          <%= subject.diemTB %>
-                      </span>
-                  </td>
-                  <td>
-                      <button type="button" data-fix-btn="<%= subject._id %>"
-                          onclick="enableUpdateRow(this.dataset.fixBtn);"
-                          class="m-1 button is-primary is-small is-rounded">Sửa</button>
-                      <button type="button" data-cancel-btn="<%= subject._id %>"
-                          onclick="cancelUpdateRow(this.dataset.cancelBtn)"
-                          class="m-1 button is-primary is-small is-rounded" disabled>Hủy</button>
-                      <button type="button" data-update-btn="<%= subject._id %>"
-                          onclick="updateRow(this.dataset.updateBtn);"
-                          class="m-1 button is-primary is-small is-rounded" disabled>Cập nhật</button>
-                      <button type="button" data-delete-btn="<%= subject._id %>"
-                          onclick="deleteSubject(this.dataset.deleteBtn);"
-                          class="m-1 button is-danger is-small is-rounded">Xóa</button>
-                  </td>
-              </tr>
-              <% }) %>
-      </tbody>
-  </table>
+    <table class="table is-striped mb-2" id="main-table" class="display">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã HP</th>
+                <th>Mã in</th>
+                <th>Tên học phần</th>
+                <th>Học kỳ</th>
+                <th>Số tín chỉ</th>
+                <th>TBKTTX</th>
+                <th>Điểm thi</th>
+                <th>Điểm TB</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach((subject, index)=> { %>
+                <tr data-row-id="<%= subject._id %>">
+                    <td>
+                        <%= (index+1) %>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="maHP" class="input is-info is-small" type="hidden" value="<%= subject.maHP %>">
+                        <span>
+                            <%= subject.maHP %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="maIn" class="input is-info is-small" type="hidden" value="<%= subject.maIn %>">
+                        <span>
+                            <%= subject.maIn %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="tenHP" class="input is-info is-small" type="hidden" value="<%= subject.tenHP %>">
+                        <span>
+                            <%= subject.tenHP %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="hocKy" class="input is-info is-small" type="hidden" value="<%= subject.hocKy %>">
+                        <span>
+                            <%= subject.hocKy %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="soTinChi" class="input is-info is-small" type="hidden"
+                            value="<%= subject.soTinChi %>">
+                        <span>
+                            <%= subject.soTinChi %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="tbKtraTX" class="input is-info is-small" type="hidden"
+                            value="<%= subject.tbKtraTX %>">
+                        <span>
+                            <%= subject.tbKtraTX %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="diemThi" class="input is-info is-small" type="hidden"
+                            value="<%= subject.diemThi %>">
+                        <span>
+                            <%= subject.diemThi %>
+                        </span>
+                    </td>
+                    <td data-id="<%= subject._id %>">
+                        <input title="diemTB" class="input is-info is-small" type="hidden"
+                            value="<%= subject.diemTB %>">
+                        <span>
+                            <%= subject.diemTB %>
+                        </span>
+                    </td>
+                    <td>
+                        <button type="button" data-fix-btn="<%= subject._id %>"
+                            onclick="enableUpdateRow(this.dataset.fixBtn);"
+                            class="m-1 button is-primary is-small is-rounded">Sửa</button>
+                        <button type="button" data-cancel-btn="<%= subject._id %>"
+                            onclick="cancelUpdateRow(this.dataset.cancelBtn)"
+                            class="m-1 button is-primary is-small is-rounded" disabled>Hủy</button>
+                        <button type="button" data-update-btn="<%= subject._id %>"
+                            onclick="updateRow(this.dataset.updateBtn);"
+                            class="m-1 button is-primary is-small is-rounded" disabled>Cập nhật</button>
+                        <button type="button" data-delete-btn="<%= subject._id %>"
+                            onclick="deleteSubject(this.dataset.deleteBtn);"
+                            class="m-1 button is-danger is-small is-rounded">Xóa</button>
+                        <button type="button" data-view-subject-btn="<%= subject._id %>"
+                            onclick="viewDetailSubject(this.dataset.viewSubjectBtn);"
+                            class="m-1 button is-info is-small is-rounded">Xem chi tiết</button>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
 </div>

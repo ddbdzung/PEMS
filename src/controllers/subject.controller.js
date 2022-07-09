@@ -1,4 +1,5 @@
 const { Subject } = require('../models')
+const { subjectService } = require('../services')
 const { catchAsync } = require('../utils')
 
 const createSubject = catchAsync(async (req, res) => {
@@ -54,11 +55,20 @@ const deleteSubject = catchAsync(async (req, res) => {
   })
 })
 
+const getSubject = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const subject = await subjectService.getSubjectById(id)
+  res.json({
+    data: subject,
+  })
+})
+
 const getAverageScoreOfAllValuedSubject = catchAsync(async (req, res) => {
   const subjects = Subject.find({})
 })
 
 module.exports = {
+  getSubject,
   createSubject,
   updateSubject,
   deleteSubject,

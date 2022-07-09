@@ -9,4 +9,8 @@ router
   .put(subjectController.updateSubject)
   .delete(subjectController.deleteSubject)
 
+router
+  .route('/:id')
+  .get(subjectController.getSubject)
+
 module.exports = router
