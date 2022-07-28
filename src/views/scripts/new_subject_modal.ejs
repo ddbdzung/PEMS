@@ -18,6 +18,11 @@
     data.tbKtraTX = $(`[title = 'tbKtraTX']`).val()
     data.diemThi = $(`[title = 'diemThi']`).val()
     data.diemTB = $(`[title = 'diemTB']`).val()
+    if ($(`[title = 'isValueSubject']`).is(':checked')) {
+      data.isValueSubject = true
+    } else {
+      data.isValueSubject = false
+    }
     return data
   }
   function callApiAddNewSubject(data) {

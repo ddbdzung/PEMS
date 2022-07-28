@@ -12,7 +12,9 @@ const createSubject = catchAsync(async (req, res) => {
     tbKtraTX: req.body.tbKtraTX,
     diemThi: req.body.diemThi,
     diemTB: req.body.diemTB,
+    duocTinhTichLuy: req.body.isValueSubject,
   }
+  console.log(dataFromClient)
   await Subject.create(dataFromClient, (err, dataFromDatabase) => {
     if (err) return res.send(err)
     
@@ -36,6 +38,7 @@ const updateSubject = catchAsync(async (req, res) => {
     tbKtraTX: req.body.tbKtraTX,
     diemThi: req.body.diemThi,
     diemTB: req.body.diemTB,
+    duocTinhTichLuy: req.body.isValueSubject,
   }
   const { id } = req.body
   const beforeUpdatedData = await Subject.findOneAndUpdate({ _id: id }, newData)

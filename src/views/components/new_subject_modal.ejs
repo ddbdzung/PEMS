@@ -21,8 +21,20 @@
                         <input title="diemTB" class="input is-info my-3" type="text" placeholder="Điểm trung bình">
                     </div>
                 </div>
+                <div class="field">
+                    <div class="control">
+                        <label class="radio">
+                            <input name="isValueSubject" title="isValueSubject" type="radio" value="true" checked>
+                            Tích lũy
+                          </label>
+                          <label class="radio">
+                            <input name="isValueSubject" type="radio" value="false">
+                            Không tích lũy
+                          </label>
+                    </div>
+                </div>
             </section>
-            <footer class="modal-card-foot is-flex is-justify-content-flex-end">
+            <footer class="modal-card-foot field is-grouped is-grouped-right">
                 <div class="columns">
                     <button id="cancel-add-new-subject-btn" class="column button is-danger mr-3">Hủy</button>
                     <button id="submit-add-new-subject-btn" class="column button is-success mr-3">Tạo</button>

@@ -1,0 +1,151 @@
+<script>
+  // Xử lý tabs bằng javascript DOM
+  // function openTab(evt, tab) {
+  //   var x, tablinks
+  //   x = document.getElementsByClassName('detail-subject-content')
+  //   for (i = 0; i < x.length; i++) {
+  //     x[i].style.display = "none"
+  //   }
+  //   tablinks = document.getElementsByClassName('detail-subject-tab')
+  //   for (i = 0; i < x.length; i++) {
+  //     tablinks[i].className = tablinks[i].className.replace("is-active", "")
+  //   }
+  //   $(`[data-detail-subject-content = "${tab}"]`).css('display', "block")
+  //   evt.currentTarget.className += " is-active"
+  // }
+  // Xử lý tabs bằng jquery
+  $('.detail-subject-tab').bind('click', function () {
+    var tab = $(this).data('detailSubjectTab')
+    $('.detail-subject-content').each(function () {
+      $(this).css('display', 'none')
+    })
+    $('.detail-subject-tab').each(function () {
+      if ($(this).hasClass('is-active')) {
+        $(this).removeClass('is-active')
+      }
+    })
+    $(`[data-detail-subject-content = "${tab}"]`).css('display', "block")
+    $(this).addClass('is-active')
+  })
+
+  $('#cancel-view-detail-subject-btn').bind('click', function (e) {
+    $(`[title = view-maHP]`).removeAttr('data-s-id')
+    $('#view-detail-subject-modal').removeClass('is-active')
+    $('#view-isValueSubject').attr('disabled', 'disabled')
+  })
+  $('#close-view-detail-subject-modal-btn').bind('click', function (e) {
+    $(`[title = view-maHP]`).removeAttr('data-s-id')
+    $('#view-detail-subject-modal').removeClass('is-active')
+    $('#view-isValueSubject').attr('disabled', 'disabled')
+  })
+  $('#update-view-detail-subject-btn').bind('click', function (e) {
+    $('[title = view-maHP]').removeAttr('disabled')
+    $('[title = view-maIn]').removeAttr('disabled')
+    $('[title = view-tenHP]').removeAttr('disabled')
+    $('[title = view-hocKy]').removeAttr('disabled')
+    $('[title = view-diemChu]').removeAttr('disabled')
+    $('[title = view-soTinChi]').removeAttr('disabled')
+    $('[title = view-tbKtraTX]').removeAttr('disabled')
+    $('[title = view-diemThi]').removeAttr('disabled')
+    $('[title = view-diemTB]').removeAttr('disabled')
+
+    $('#submit-view-detail-subject-btn').removeAttr('disabled')
+    $('#reset-view-detail-subject-btn').removeAttr('disabled')
+    $('#view-isValueSubject').removeAttr('disabled')
+    $(this).attr('disabled', 'disabled')
+  })
+  $('#reset-view-detail-subject-btn').bind('click', function (e) {
+    id = $(`[title = view-maHP]`).attr('data-s-id')
+    callViewDetailSubjectApi(id)
+
+    $('[title = view-maHP]').attr('disabled', 'disabled')
+    $('[title = view-maIn]').attr('disabled', 'disabled')
+    $('[title = view-tenHP]').attr('disabled', 'disabled')
+    $('[title = view-hocKy]').attr('disabled', 'disabled')
+    $('[title = view-diemChu]').attr('disabled', 'disabled')
+    $('[title = view-soTinChi]').attr('disabled', 'disabled')
+    $('[title = view-tbKtraTX]').attr('disabled', 'disabled')
+    $('[title = view-diemThi]').attr('disabled', 'disabled')
+    $('[title = view-diemTB]').attr('disabled', 'disabled')
+
+    $('#update-view-detail-subject-btn').removeAttr('disabled')
+    $('#submit-view-detail-subject-btn').attr('disabled', 'disabled')
+    $('#view-isValueSubject').attr('disabled', 'disabled')
+    $(this).attr('disabled', 'disabled')
+  })
+  $('#submit-view-detail-subject-btn').bind('click', function (e) {
+    const data = {}
+    data.id = $('[title = view-maHP]').data('sId')
+    data.maHP = $('[title = view-maHP]').val()
+    data.maIn = $('[title = view-maIn]').val()
+    data.tenHP = $('[title = view-tenHP]').val()
+    data.hocKy = $('[title = view-hocKy]').val()
+    data.diemChu = $('[title = view-diemChu]').val()
+    data.soTinChi = $('[title = view-soTinChi]').val()
+    data.tbKtraTX = $('[title = view-tbKtraTX]').val()
+    data.diemThi = $('[title = view-diemThi]').val()
+    data.diemTB = $('[title = view-diemTB]').val()
+    data.isValueSubject = $('#view-isValueSubject').val()
+    callUpdateSubjectApiInDeTailSubjectModal(data)
+
+    $('#update-view-detail-subject-btn').removeAttr('disabled')
+    $('#reset-view-detail-subject-btn').attr('disabled', 'disabled')
+    $('#submit-view-detail-subject-btn').attr('disabled', 'disabled')
+    $('#view-isValueSubject').attr('disabled', 'disabled')
+  })
+  function parseDataToModal(data) {
+    for (let key of Object.keys(data)) {
+      $(`[title = view-${key}]`).val(data[key])
+    }
+    if ($(`[title = view-duocTinhTichLuy]`).val() === 'true') {
+      $('#view-isValueSubject').val('true')
+    } else {
+      $('#view-isValueSubject').val('false')
+    }
+  }
+  function viewDetailSubjectModal(id) {
+    $('#view-detail-subject-modal').addClass('is-active')
+    $('#view-detail-subject-modal label').css('margin-bottom', '-8px')
+  }
+  function addSIdToMaHP(id) {
+    $(`[title = view-maHP]`).attr('data-s-id', id)
+  }
+  function callUpdateSubjectApiInDeTailSubjectModal(data) {
+    $.ajax({
+        url: '/api/subject',
+        type: 'PUT',
+        cache: false,
+        processData: false,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        success: function(response) {
+          const data = response.newData
+          delete data.id
+          parseDataToModal(data)
+          alertSuccessTask(response.message)
+          revealReloadButton()
+        },
+        error: function(error) {
+          alertFailureTask(error)
+        }
+    })
+  }
+  function callViewDetailSubjectApi(id) {
+    $.ajax({
+      url: `/api/subject/${id}`,
+      type: 'GET',
+      success: function (response) {
+        parseDataToModal(response.data)
+      },
+      error: function (error) {
+        alertFailureTask(error)
+      }
+    })
+  }
+  function viewDetailSubject(id) {
+    callViewDetailSubjectApi(id)
+    viewDetailSubjectModal(id)
+    addSIdToMaHP(id)
+  }
+</script>
