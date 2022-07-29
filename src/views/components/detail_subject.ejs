@@ -1,0 +1,72 @@
+<div class="container is-widescreen">
+    <div id="view-detail-subject-modal" class="modal modal-full-screen">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Chi tiết môn học</p>
+                <button id="close-view-detail-subject-modal-btn" class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div id="detail-subject-tabs" class="tabs is-centered">
+                    <ul>
+                        <li class="is-active detail-subject-tab" data-detail-subject-tab="1">
+                        <!-- <li class="is-active detail-subject-tab" data-detail-subject-tab="1" onclick="openTab(event, '1')"> -->
+                            <a>Cơ bản</a>
+                        </li>
+                        <li class="detail-subject-tab" data-detail-subject-tab="2">
+                        <!-- <li class="detail-subject-tab" data-detail-subject-tab="2" onclick="openTab(event, '2')"> -->
+                            <a>Nâng cao</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="detail-subject-tab-content">
+                    <div class="is-active detail-subject-content" data-detail-subject-content="1">
+                        <div class="columns is-multiline">
+                            <div class="column is-half">
+                                <label class="label is-small">Mã học phần</label>
+                                <input title="view-maHP" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Mã in</label>
+                                <input title="view-maIn" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Tên học phần</label>
+                                <input title="view-tenHP" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Học kỳ</label>
+                                <input title="view-hocKy" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Điểm chữ</label>
+                                <input title="view-diemChu" class="input is-info my-3" type="text" disabled>
+                            </div>
+                            <div class="column">
+                                <label class="label is-small">Số tín chỉ</label>
+                                <input title="view-soTinChi" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Trung bình kiểm tra thường xuyên</label>
+                                <input title="view-tbKtraTX" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Điểm thi</label>
+                                <input title="view-diemThi" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Điểm trung bình</label>
+                                <input title="view-diemTB" class="input is-info my-3" type="text" disabled>
+                                <label class="label is-small">Loại điểm</label>
+                                <input title="view-duocTinhTichLuy" class="input is-info my-3" type="hidden" disabled>
+                                <div class="select mt-3">
+                                    <select id="view-isValueSubject" disabled>
+                                      <option value="true">Được tích lũy</option>
+                                      <option value="false">Không được tích lũy</option>
+                                    </select>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: none;" class="detail-subject-content" data-detail-subject-content="2">
+                        <button class="button">Halo</button>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot field is-grouped is-grouped-right">
+                <div class="columns">
+                    <button id="cancel-view-detail-subject-btn" class="column button is-danger mr-3">Thoát</button>
+                    <button id="update-view-detail-subject-btn" class="column button is-warning mr-3">Sửa</button>
+                    <button id="reset-view-detail-subject-btn" class="column button is-light mr-3" disabled>Hoàn tác</button>
+                    <button id="submit-view-detail-subject-btn" class="column button is-success mr-3" disabled>Lưu</button>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
