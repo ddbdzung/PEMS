@@ -21,18 +21,23 @@ const subjectSchema = mongoose.Schema(
       required: true,
     },
     hocKy: {
-      type: String,
-      trim: true,
+      type: Number,
+      min: 1,
     },
     soTinChi: {
       type: Number,
       required: true,
+      min: 1,
     },
     tbKtraTX: {
       type: Number,
+      min: 0,
+      max: 10,
     },
     diemThi: {
       type: Number,
+      min: 0,
+      max: 10,
     },
     diemTB: {
       type: Number,

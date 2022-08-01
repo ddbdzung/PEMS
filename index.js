@@ -3,7 +3,8 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const routes = require('./src/routes')
-
+const config = require('./src/config/config')
+const { errorConverter, errorHandler } = require('./src/middlewares/error')
 // parse json request body
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -22,6 +23,12 @@ connectDb()
 // Init routes
 app.use('/', routes)
 
-app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
-  console.log(`Hello David Dang, I'm running at http://${process.env.APP_HOST}:${process.env.APP_PORT}/`)
+// convert error to ApiError, if needed
+app.use(errorConverter);
+
+// handle error
+app.use(errorHandler);
+
+app.listen(config.port, config.host, () => {
+  console.log(`Hello David Dang, I'm running at http://${config.host}:${config.port}/`)
 })

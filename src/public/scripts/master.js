@@ -183,4 +183,14 @@
   function alertFailureTask(message) {
     alertify.error(message)
   }
+  /**
+   * @param {*} messages Validation string return by server
+   * @param {*} syntax spliter
+   */
+  function alertSeveralFailureTask(messages, syntax) {
+    var messageArr = messages.split(syntax)
+    messageArr.forEach(function(message) {
+        alertFailureTask(message)
+    })
+  }
 // ----------------------------------------------

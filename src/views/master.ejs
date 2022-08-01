@@ -17,11 +17,13 @@
 <!-- -------------------- Start 'New Subject Modal' ---------------------------------------------- -->
     <%- include ('./components/new_subject_modal.ejs') %>
     <%- include ('./scripts/new_subject_modal.ejs') %>
+    <%- include ('./validation/new_subject_modal.ejs') %>
 <!-- -------------------- End 'New Subject Modal' ---------------------------------------------- -->
 
 <!-- -------------------- Start 'View Detail Subject Modal' ---------------------------------------------- -->
     <%- include ('./components/detail_subject.ejs') %>
     <%- include ('./scripts/detail_subject.ejs') %>
+    <%- include ('./validation/detail_subject.ejs') %>
 <!-- -------------------- End 'View Detail Subject Modal' ---------------------------------------------- -->
 
 <!-- -------------------- Start 'DataTable' ---------------------------------------------- -->
@@ -30,9 +32,14 @@
 <!-- -------------------- End 'DataTable' ---------------------------------------------- -->
 
 <!-- -------------------- Start 'Config Buttons Master' ---------------------------------------------- -->
-    <%- include ('./components/config_button_master.ejs') %>
-    <%- include ('./scripts/config_button_master.ejs') %>
+<%- include ('./components/config_button_master.ejs') %>
+<%- include ('./scripts/config_button_master.ejs') %>
 <!-- -------------------- End 'Config Buttons Master' ---------------------------------------------- -->
+
+<!-- -------------------- Start 'Util scripts' ---------------------------------------------- -->
+<%- include ('./utils/deleteEmptyProp.ejs') %>
+<!-- -------------------- End 'Util scripts' ---------------------------------------------- -->
+
 
 </body>
 

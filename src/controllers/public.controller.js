@@ -14,25 +14,6 @@ const viewHome = async (req, res) => {
   })
 }
 
-const viewNewSubject = (req, res) => {
-  res.render('pages/new_subject', {
-    title: 'Create a new subject',
-  })
-}
-
-const createNewSubject = async (req, res) => {
-  const newData = {
-    maHP: req.body.maHP,
-    maIn: req.body.maIn,
-    tenHP: req.body.tenHP,
-    hocKy: req.body.hocKy,
-    soTinChi: parseInt(req.body.soTinChi),
-    tbKtraTX: parseFloat(req.body.tbKtraTX),
-    diemThi: parseFloat(req.body.diemThi),
-    diemTB: parseFloat(req.body.diemTB),
-  }
-}
-
 const getTongTinChi = async (req, res) => {
   const subjects = await Subject.find({})
   const length = subjects.length
@@ -76,7 +57,6 @@ const getDiemTrungBinh = async (req, res) => {
 
 module.exports = {
   viewHome,
-  viewNewSubject,
 
   importData,
   getTongTinChi,

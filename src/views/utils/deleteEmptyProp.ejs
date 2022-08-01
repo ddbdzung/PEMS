@@ -1,0 +1,16 @@
+<script>
+  /**
+   ** {Object} object 
+   ** {Array} props Array of properties
+   ** @Returns {Object} new object which won't include empty props in props array
+  */
+  function deleteEmptyProps(object, props) {
+    var result = JSON.parse(JSON.stringify(object));
+     props.forEach(function(prop) {
+      if (!object[prop]) {
+        delete result[prop]
+      }
+    })
+    return result
+  }
+</script>
