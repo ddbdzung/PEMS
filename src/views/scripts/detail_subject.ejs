@@ -43,7 +43,6 @@
     $('[title = view-maIn]').removeAttr('disabled')
     $('[title = view-tenHP]').removeAttr('disabled')
     $('[title = view-hocKy]').removeAttr('disabled')
-    $('[title = view-diemChu]').removeAttr('disabled')
     $('[title = view-soTinChi]').removeAttr('disabled')
     $('[title = view-tbKtraTX]').removeAttr('disabled')
     $('[title = view-diemThi]').removeAttr('disabled')
@@ -62,7 +61,6 @@
     $('[title = view-maIn]').attr('disabled', 'disabled')
     $('[title = view-tenHP]').attr('disabled', 'disabled')
     $('[title = view-hocKy]').attr('disabled', 'disabled')
-    $('[title = view-diemChu]').attr('disabled', 'disabled')
     $('[title = view-soTinChi]').attr('disabled', 'disabled')
     $('[title = view-tbKtraTX]').attr('disabled', 'disabled')
     $('[title = view-diemThi]').attr('disabled', 'disabled')
@@ -74,24 +72,26 @@
     $(this).attr('disabled', 'disabled')
   })
   $('#submit-view-detail-subject-btn').bind('click', function (e) {
-    const data = {}
-    data.id = $('[title = view-maHP]').data('sId')
-    data.maHP = $('[title = view-maHP]').val()
-    data.maIn = $('[title = view-maIn]').val()
-    data.tenHP = $('[title = view-tenHP]').val()
-    data.hocKy = $('[title = view-hocKy]').val()
-    data.diemChu = $('[title = view-diemChu]').val()
-    data.soTinChi = $('[title = view-soTinChi]').val()
-    data.tbKtraTX = $('[title = view-tbKtraTX]').val()
-    data.diemThi = $('[title = view-diemThi]').val()
-    data.diemTB = $('[title = view-diemTB]').val()
-    data.isValueSubject = $('#view-isValueSubject').val()
-    callUpdateSubjectApiInDeTailSubjectModal(data)
-
-    $('#update-view-detail-subject-btn').removeAttr('disabled')
-    $('#reset-view-detail-subject-btn').attr('disabled', 'disabled')
-    $('#submit-view-detail-subject-btn').attr('disabled', 'disabled')
-    $('#view-isValueSubject').attr('disabled', 'disabled')
+    let data = {
+      id: $('[title = view-maHP]').data('sId'),
+      maHP: $('[title = view-maHP]').val(),
+      maIn: $('[title = view-maIn]').val(),
+      tenHP: $('[title = view-tenHP]').val(),
+      hocKy: $('[title = view-hocKy]').val(),
+      soTinChi: $('[title = view-soTinChi]').val(),
+      tbKtraTX: $('[title = view-tbKtraTX]').val(),
+      diemThi: $('[title = view-diemThi]').val(),
+      diemTB: $('[title = view-diemTB]').val(),
+      duocTinhTichLuy: $('#view-isValueSubject').val(),
+    }
+    const props = ['tbKtraTX', 'diemThi', 'diemTB', 'hocKy']
+    data = deleteEmptyProps(data, props)
+    const errors = validateDetailSubject(data)
+    if (errors.hasError) {
+      alertSeveralFailureTask(errors.errorMessages, ',')
+    } else {
+      callUpdateSubjectApiInDeTailSubjectModal(data)
+    }
   })
   function parseDataToModal(data) {
     for (let key of Object.keys(data)) {
@@ -125,9 +125,13 @@
           parseDataToModal(data)
           alertSuccessTask(response.message)
           revealReloadButton()
+          $('#update-view-detail-subject-btn').removeAttr('disabled')
+          $('#reset-view-detail-subject-btn').attr('disabled', 'disabled')
+          $('#submit-view-detail-subject-btn').attr('disabled', 'disabled')
+          $('#view-isValueSubject').attr('disabled', 'disabled')
         },
         error: function(error) {
-          alertFailureTask(error)
+          alertSeveralFailureTask(error.responseJSON.message, ', ')
         }
     })
   }

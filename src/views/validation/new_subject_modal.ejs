@@ -1,0 +1,41 @@
+<script>
+  function validateNewSubject(data) {
+    let errorMessages = ""
+    if (validator.isEmpty(data.maHP)){
+      errorMessages += "Mã học phần không được để trống,"
+    } else if (data.maHP.length >= 10) {
+      errorMessages += "Mã học phần không được có độ dài quá 9 kí tự,"
+    }
+    if (validator.isEmpty(data.tenHP)){
+      errorMessages += "Tên học phần không được để trống,"
+    }
+    if (validator.isEmpty(data.maIn)){
+      errorMessages += "Mã in không được để trống,"
+    } else if (data.maHP.length >= 10) {
+      errorMessages += "Mã học phần không được có độ dài quá 9 kí tự,"
+    }
+    if (validator.isEmpty(data.soTinChi)){
+      errorMessages += "Số tín chỉ không được để trống,"
+    }
+    if (parseInt(data.soTinChi) <= 0 || parseInt(data.soTinChi) >= 16) {
+      errorMessages += "Số tín chỉ phải lớn hơn 0 và nhỏ hơn 16,"
+    }
+
+    if (data?.tbKtraTX < 0 || data?.tbKtraTX > 10) {
+      errorMessages += "Điểm trung bình kiểm tra thường xuyên phải là số dương và không lớn hơn 10,"
+    }
+    if (parseFloat(data?.diemThi) < 0 || parseFloat(data?.diemThi) > 10) {
+      errorMessages += "Điểm trung bình kiểm tra thường xuyên phải là số dương và không lớn hơn 10,"
+    }
+    if (parseFloat(data?.diemTrungBinh) < 0 || parseFloat(data?.diemTrungBinh) > 10) {
+      errorMessages += "Điểm trung bình kiểm tra thường xuyên phải là số dương và không lớn hơn 10,"
+    }
+
+    const hasError = (errorMessages.length > 0) ? true : false
+    errorMessages = (hasError) ? errorMessages.slice(0, -1) : null
+    return {
+      hasError,
+      errorMessages,
+    }
+  }
+</script>

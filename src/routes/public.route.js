@@ -12,11 +12,6 @@ router
   .get(publicController.getDiemTrungBinh)
 
 router
-  .route('/new-subject')
-  .get(publicController.viewNewSubject)
-  // .post(publicController.)
-
-router
   .route('/importData')
   .get(publicController.importData)
 

@@ -14,7 +14,6 @@ const createSubject = catchAsync(async (req, res) => {
     diemTB: req.body.diemTB,
     duocTinhTichLuy: req.body.isValueSubject,
   }
-  console.log(dataFromClient)
   await Subject.create(dataFromClient, (err, dataFromDatabase) => {
     if (err) return res.send(err)
     

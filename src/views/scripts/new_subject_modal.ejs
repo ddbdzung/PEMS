@@ -23,7 +23,8 @@
     } else {
       data.isValueSubject = false
     }
-    return data
+    const props = ['tbKtraTX', 'diemThi', 'diemTB', 'hocKy']
+    return deleteEmptyProps(data, props)
   }
   function callApiAddNewSubject(data) {
     $.ajax({
@@ -40,12 +41,17 @@
         setTimeout(() => location.reload(), 1500)
       },
       error: function(error) {
-        alertFailureTask(error)
+        alertSeveralFailureTask(error.responseJSON.message, ', ')
       }
     })
   }
   function addNewSubjectToDatatable() {
     const data = getDataFromNewSubjectModal()
-    callApiAddNewSubject(data)
+    const errors = validateNewSubject(data)
+    if (errors.hasError) {
+      alertSeveralFailureTask(errors.errorMessages, ',')
+    } else {
+      callApiAddNewSubject(data)
+    }
   }
 </script>
