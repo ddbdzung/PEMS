@@ -1,0 +1,31 @@
+<script>
+  $('#btn-overall-point').on('click', function() {
+    $('#modal-overall-point').addClass('is-active')
+    callOverallPointsApi()
+  })
+  $('#modal-overall-point-background').on('click', function() {
+    $('#modal-overall-point').removeClass('is-active')
+  })
+  function callOverallPointsApi() {
+    $.ajax({
+      url: `/get-value-score`,
+      type: 'GET',
+      success: function (response) {
+        const { result, diemTrungBinhMonDaTichLuy, tongTinChiDaTichLuy } = response
+        $('#overall-point-progress').attr('value', result)
+        if (result <= 2.5) {
+          $('#overall-point-progress').addClass('is-danger')
+        } else if (result > 2.5 && result < 3.2) {
+          $('#overall-point-progress').addClass('is-warning')
+        } else if (result >= 3.2 && result < 3.6) {
+          $('#overall-point-progress').addClass('is-success')
+        } else if (result >= 3.6) {
+          $('#overall-point-progress').addClass('is-primary')
+        }
+        $('#modal-overall-point-content li:nth-child(1)').text(`Tổng tín chỉ tích lũy: ${tongTinChiDaTichLuy}`)
+        $('#modal-overall-point-content li:nth-child(2)').text(`Tổng điểm trung bình các môn đã tích lũy: ${diemTrungBinhMonDaTichLuy}`)
+        $('#modal-overall-point-content li:nth-child(3)').text(`Điểm trung bình chung môn đã tích lũy: ${result}`)
+      },
+    })
+  }
+</script>

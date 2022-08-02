@@ -3,11 +3,6 @@ const { subjectService } = require('../services')
 
 const viewHome = async (req, res) => {
   const subject = await Subject.find({})
-  // let data = subject.map(item => {
-  //   let tmp = JSON.parse(JSON.stringify(item))
-  //   tmp.diemChu = subjectService.getAlphabeticalScore(item)
-  //   return tmp
-  // })
   res.render('master', {
     title: 'Home',
     data: subject,
@@ -39,12 +34,10 @@ const getDiemTrungBinh = async (req, res) => {
   let count = 0
   data.forEach(item => {
     if (item.diemTichLuy !== 0 && item.duocTinhTichLuy) {
-      // console.log(item.tenHP)
       count++
       diemTrungBinh += (item.soTinChi * item.diemTichLuy)
       tongTinChi += item.soTinChi
     } else {
-      // console.log(item.tenHP)
     }
   })
   res.json({
