@@ -1,3 +1,17 @@
+body {
+  position: relative;
+}
+
+#btn-overall-point {
+  position: fixed;
+  background-color: rgba(0,250,154, 0.7);
+  z-index: 1;
+  top: 75%;
+  left: 5%;
+  font-size: 12px;
+  box-shadow: 3px 3px 3px rgba(25, 225, 148, 0.3);
+}
+
 .table td {
   vertical-align: middle;
 }
