@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose')
 const routes = require('./src/routes')
 const config = require('./src/config/config')
+const { connect } = require('./src/config/mongodb')
 const { errorConverter, errorHandler } = require('./src/middlewares/error')
 // parse json request body
 app.use(express.json())
@@ -14,11 +15,7 @@ app.use(express.static('./src/public'))
 app.set('view engine', 'ejs')
 app.set('views', './src/views')
 
-let connectDb = () => {
-  const Uri = `${process.env.DB_CONNECTION}://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
-  return mongoose.connect(Uri)
-}
-connectDb()
+connect()
 
 // Init routes
 app.use('/', routes)
@@ -29,6 +26,6 @@ app.use(errorConverter);
 // handle error
 app.use(errorHandler);
 
-app.listen(config.port, config.host, () => {
-  console.log(`Hello David Dang, I'm running at http://${config.host}:${config.port}/`)
+app.listen(process.env.PORT || 3000, process.env.HOST || '0.0.0.0', () => {
+  console.log('Listening on port: ' + process.env.PORT)
 })

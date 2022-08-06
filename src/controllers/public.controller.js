@@ -9,6 +9,10 @@ const viewHome = async (req, res) => {
   })
 }
 
+const dropDatabase = async (req, res) => {
+  return await Subject.deleteMany({})
+}
+
 const getTongTinChi = async (req, res) => {
   const subjects = await Subject.find({})
   const length = subjects.length
@@ -54,4 +58,5 @@ module.exports = {
   importData,
   getTongTinChi,
   getDiemTrungBinh,
+  dropDatabase,
 }

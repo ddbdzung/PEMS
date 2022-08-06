@@ -97,7 +97,8 @@
     for (let key of Object.keys(data)) {
       $(`[title = view-${key}]`).val(data[key])
     }
-    if ($(`[title = view-duocTinhTichLuy]`).val() === 'true') {
+    console.log(data)
+    if (data.duocTinhTichLuy === true) {
       $('#view-isValueSubject').val('true')
     } else {
       $('#view-isValueSubject').val('false')
@@ -140,6 +141,7 @@
       url: `/api/subject/${id}`,
       type: 'GET',
       success: function (response) {
+        console.log(response.data)
         parseDataToModal(response.data)
       },
       error: function (error) {

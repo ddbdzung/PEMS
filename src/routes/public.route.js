@@ -16,6 +16,10 @@ router
   .get(publicController.importData)
 
 router
+  .route('/dropDatabase')
+  .get(publicController.dropDatabase)
+
+router
   .route('/test')
   .get(publicController.getTongTinChi)
 
