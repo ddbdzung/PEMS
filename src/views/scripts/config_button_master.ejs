@@ -1,9 +1,56 @@
+<!-- <script type="text/javascript" src="/scripts/xlsx.min.js"> -->
 <script>
-  $('#add-new-subject-btn').bind('click', function(e) {
+  $('#add-new-subject-btn').bind('click', function (e) {
     $('#new-subject-modal').addClass('is-active')
   })
-  $('#reload-page-btn').bind('click', function(e) {
+  $('#export-data-btn').bind('click', function (e) {
+    callApiExportXlsx()
+  })
+  $('#reload-page-btn').bind('click', function (e) {
     location.reload()
   })
-
+  
+  function formatDataBeforeExportingXlsx(data) {
+    let keyObject = getKeyObject()
+    let result = data.map(item => {
+      delete item._id
+      delete item.createdAt
+      delete item.updatedAt
+      delete item.__v
+      item.duocTinhTichLuy = (item.duocTinhTichLuy === true) ? 'Có' : 'Không'
+      return renameKeys(item, keyObject)
+    })
+    return result
+  }
+  function convertDataToXlsx(data) {
+    var wb = XLSX.utils.book_new();
+    var ws = XLSX.utils.json_to_sheet(data,
+      {
+        origin: 'A2',
+        type: 'tring',
+      })
+    XLSX.utils.sheet_add_json(ws, [{
+      A: 'BẢNG ĐIỂM',
+    }], {
+      skipHeader: true,
+      origin: { r: 0, c: 3 },
+    })
+    var sheetName = 'Data'
+    XLSX.utils.book_append_sheet(wb, ws, sheetName)
+    var ExportFile = 'Data.xlsx'
+    XLSX.writeFile(wb, ExportFile)
+  }
+  function callApiExportXlsx() {
+    $.ajax({
+      url: '/api/f',
+      type: 'GET',
+      success: function (response) {
+        var result = formatDataBeforeExportingXlsx(response.data)
+        convertDataToXlsx(result)
+      },
+      error: function (error) {
+        alertFailureTask('Server occurs error!')
+      }
+    })
+  }
 </script>

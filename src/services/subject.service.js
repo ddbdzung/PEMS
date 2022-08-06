@@ -59,8 +59,13 @@ const getSubjectById = async (id) => {
   return data._doc
 }
 
+const getAllSubjects = async () => {
+  return await Subject.find({}).lean()
+}
+
 module.exports = {
   getAlphabeticalScore,
   getValueScore,
   getSubjectById,
+  getAllSubjects,
 }
