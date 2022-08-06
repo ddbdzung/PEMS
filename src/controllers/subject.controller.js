@@ -37,7 +37,7 @@ const updateSubject = catchAsync(async (req, res) => {
     tbKtraTX: req.body.tbKtraTX,
     diemThi: req.body.diemThi,
     diemTB: req.body.diemTB,
-    duocTinhTichLuy: req.body.isValueSubject,
+    duocTinhTichLuy: req.body.duocTinhTichLuy,
   }
   const { id } = req.body
   const beforeUpdatedData = await Subject.findOneAndUpdate({ _id: id }, newData)
