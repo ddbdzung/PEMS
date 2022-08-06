@@ -171,7 +171,9 @@
   }
   function updateRow(id) {
     btnDisableUpdateRow(id)
-    const data = getDataFromRow(id)
+    let data = getDataFromRow(id)
+    const props = ['tbKtraTX', 'diemThi', 'diemTB', 'hocKy']
+    data = deleteEmptyProps(data, props)
     callUpdateSubjectApi(data)
     disableUpdateRowAfterUpdated(id)
   }
