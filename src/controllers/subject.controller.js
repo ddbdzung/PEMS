@@ -40,7 +40,10 @@ const updateSubject = catchAsync(async (req, res) => {
     duocTinhTichLuy: req.body.duocTinhTichLuy,
   }
   const { id } = req.body
+  console.log(id)
   const beforeUpdatedData = await Subject.findOneAndUpdate({ _id: id }, newData)
+  console.log(beforeUpdatedData)
+  // 62f05dd4e16e09cd53e55491
   newData.id = beforeUpdatedData._id
   res.json({
     message: 'Bạn đã cập nhật thành công!',
@@ -63,10 +66,6 @@ const getSubject = catchAsync(async (req, res) => {
   res.json({
     data: subject,
   })
-})
-
-const getAverageScoreOfAllValuedSubject = catchAsync(async (req, res) => {
-  const subjects = Subject.find({})
 })
 
 module.exports = {

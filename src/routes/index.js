@@ -4,6 +4,7 @@ const subjectRoute = require('./subject.route')
 // const authRoute = require('./auth.route')
 const publicRoute = require('./public.route')
 const fileRoute = require('./file.route')
+const testRoute = require('./test.route')
 
 const router = express.Router()
 
@@ -11,6 +12,10 @@ const defaultRoutes = [
   {
     path: '/',
     route: publicRoute,
+  },
+  {
+    path: '/api/test',
+    route: testRoute,
   },
   {
     path: '/api/f',

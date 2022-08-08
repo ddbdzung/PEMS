@@ -16,6 +16,10 @@ router
   .get(publicController.importData)
 
 router
+  .route('/exportDataToJSON')
+  .get(publicController.exportDataToJSON)
+
+router
   .route('/dropDatabase')
   .get(publicController.dropDatabase)
 

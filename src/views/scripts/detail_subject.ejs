@@ -28,18 +28,26 @@
     $(this).addClass('is-active')
   })
 
+  $(window).on('load', function() {
+    if (localStorage.getItem('temporaryDetailSubjectId')) {
+      localStorage.removeItem('temporaryDetailSubjectId')
+    }
+  })
   $('#modal-view-detail-subject-background').bind('click', function() {
     $('#view-detail-subject-modal').removeClass('is-active')
+    localStorage.removeItem('temporaryDetailSubjectId')
   })
   $('#cancel-view-detail-subject-btn').bind('click', function (e) {
     $(`[title = view-maHP]`).removeAttr('data-s-id')
     $('#view-detail-subject-modal').removeClass('is-active')
     $('#view-isValueSubject').attr('disabled', 'disabled')
+    localStorage.removeItem('temporaryDetailSubjectId')
   })
   $('#close-view-detail-subject-modal-btn').bind('click', function (e) {
     $(`[title = view-maHP]`).removeAttr('data-s-id')
     $('#view-detail-subject-modal').removeClass('is-active')
     $('#view-isValueSubject').attr('disabled', 'disabled')
+    localStorage.removeItem('temporaryDetailSubjectId')
   })
   $('#update-view-detail-subject-btn').bind('click', function (e) {
     $('[title = view-maHP]').removeAttr('disabled')
@@ -57,7 +65,7 @@
     $(this).attr('disabled', 'disabled')
   })
   $('#reset-view-detail-subject-btn').bind('click', function (e) {
-    id = $(`[title = view-maHP]`).attr('data-s-id')
+    const id = localStorage.getItem('temporaryDetailSubjectId')
     callViewDetailSubjectApi(id)
 
     $('[title = view-maHP]').attr('disabled', 'disabled')
@@ -76,7 +84,7 @@
   })
   $('#submit-view-detail-subject-btn').bind('click', function (e) {
     let data = {
-      id: $('[title = view-maHP]').data('sId'),
+      id: localStorage.getItem('temporaryDetailSubjectId'),
       maHP: $('[title = view-maHP]').val(),
       maIn: $('[title = view-maIn]').val(),
       tenHP: $('[title = view-tenHP]').val(),
@@ -110,9 +118,6 @@
     $('#view-detail-subject-modal').addClass('is-active')
     $('#view-detail-subject-modal label').css('margin-bottom', '-8px')
   }
-  function addSIdToMaHP(id) {
-    $(`[title = view-maHP]`).attr('data-s-id', id)
-  }
   function callUpdateSubjectApiInDeTailSubjectModal(data) {
     $.ajax({
         url: '/api/subject',
@@ -123,7 +128,7 @@
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data),
         success: function(response) {
-          const data = response.newData
+          let data = response.newData
           delete data.id
           parseDataToModal(data)
           alertSuccessTask(response.message)
@@ -150,9 +155,12 @@
       }
     })
   }
+  function addIdSubjectToLocalStorage(id) {
+    localStorage.setItem('temporaryDetailSubjectId', id)
+  }
   function viewDetailSubject(id) {
     callViewDetailSubjectApi(id)
     viewDetailSubjectModal(id)
-    addSIdToMaHP(id)
+    addIdSubjectToLocalStorage(id) 
   }
 </script>

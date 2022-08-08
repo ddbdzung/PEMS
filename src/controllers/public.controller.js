@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { Subject } = require('../models')
 const { subjectService } = require('../services')
 
@@ -10,7 +11,13 @@ const viewHome = async (req, res) => {
 }
 
 const dropDatabase = async (req, res) => {
-  return await Subject.deleteMany({})
+  try {
+    await Subject.deleteMany({})
+    res.send('Drop database successfully')
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Has error')
+  }
 }
 
 const getTongTinChi = async (req, res) => {
@@ -19,8 +26,32 @@ const getTongTinChi = async (req, res) => {
   res.status(200).json(length)
 }
 
+const exportDataToJSON = async (req, res) => {
+  let data = await subjectService.getAllSubjects()
+  data = data.map(item => {
+    delete item._id
+    delete item.createdAt
+    delete item.updatedAt
+    delete item.__v
+    return item
+  })
+  fs.writeFile("./src/vendor/export-data.json", JSON.stringify(data), err => {
+    if (err) {
+      return res.send(err);
+    }
+    res.send(data)
+  });
+}
+
 const importData = async (req, res) => {
-  const data = require('../vendor/data.json')  // Require data file
+  let data = require('../vendor/data.json')  // Require data file
+  data = data.map(item => {
+    delete item._id
+    delete item.createdAt
+    delete item.updatedAt
+    delete item.__v
+    return item
+  })
   await Subject.create(data)
   return res.send(data)
 }
@@ -56,6 +87,7 @@ module.exports = {
   viewHome,
 
   importData,
+  exportDataToJSON,
   getTongTinChi,
   getDiemTrungBinh,
   dropDatabase,
