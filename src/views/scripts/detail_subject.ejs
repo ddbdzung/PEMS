@@ -28,6 +28,9 @@
     $(this).addClass('is-active')
   })
 
+  $('#modal-view-detail-subject-background').bind('click', function() {
+    $('#view-detail-subject-modal').removeClass('is-active')
+  })
   $('#cancel-view-detail-subject-btn').bind('click', function (e) {
     $(`[title = view-maHP]`).removeAttr('data-s-id')
     $('#view-detail-subject-modal').removeClass('is-active')
@@ -86,7 +89,6 @@
     }
     const props = ['tbKtraTX', 'diemThi', 'diemTB', 'hocKy']
     data = deleteEmptyProps(data, props)
-    console.log('1 ', data)
     const errors = validateDetailSubject(data)
     if (errors.hasError) {
       alertSeveralFailureTask(errors.errorMessages, ',')
