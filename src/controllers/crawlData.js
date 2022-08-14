@@ -1,6 +1,7 @@
 // Reference: https://sv.dhcnhn.vn/student/result/examresult
 
 const table = document.querySelectorAll('.k-panel-mc  div:nth-child(2) tbody tr:not(tr:nth-last-child(1), tr:nth-last-child(2)')
+// const table = document.querySelectorAll('#frmMain > div.panel.panel-default.panel-border-color.panel-border-color-primary > div.k-panel-bwrap > div > div > div > div > div > div > table > tbody tr:not(tr:nth-last-child(1), tr:nth-last-child(2)')
 let data = []
 let Subject = function(maHP, maIn, tenHP, hocKy, soTinChi, tbKtraTX, diemThi, diemTB) {
   this.maHP = maHP,
@@ -12,7 +13,16 @@ let Subject = function(maHP, maIn, tenHP, hocKy, soTinChi, tbKtraTX, diemThi, di
   this.diemThi = parseFloat(diemThi),
   this.diemTB = parseFloat(diemTB)
 }
-
+// let Subject = function(maHP, maIn, tenHP, hocKy, soTinChi, tbKtraTX, diemThi, diemTB) {
+//   this.maHP = maHP,
+//   this.maIn = maIn,
+//   this.tenHP = tenHP,
+//   this.hocKy = hocKy,
+//   this.soTinChi = soTinChi,
+//   this.tbKtraTX = tbKtraTX,
+//   this.diemThi = diemThi,
+//   this.diemTB = diemTB
+// }
 for (let i of table) {
   let maHP = i.querySelector('td:nth-child(2)').innerText
   let maIn = i.querySelector('td:nth-child(3)').innerText

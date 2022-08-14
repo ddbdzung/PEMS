@@ -39,12 +39,16 @@ const updateSubject = catchAsync(async (req, res) => {
     diemTB: req.body.diemTB,
     duocTinhTichLuy: req.body.duocTinhTichLuy,
   }
+  // Mongoose khong cap nhat gia tri undefined (giu nguyen)
+  for (let i of Object.keys(newData)) {
+    if (newData[i] == undefined) {
+      newData[i] = null
+    }
+  }
   const { id } = req.body
-  console.log(id)
   const beforeUpdatedData = await Subject.findOneAndUpdate({ _id: id }, newData)
-  console.log(beforeUpdatedData)
-  // 62f05dd4e16e09cd53e55491
   newData.id = beforeUpdatedData._id
+  
   res.json({
     message: 'Bạn đã cập nhật thành công!',
     newData,

@@ -142,7 +142,7 @@
           revealReloadButton()
         },
         error: function(error) {
-          alertFailureTask(error)
+          alertFailureTask("Internal Server Error!")
         }
     })
   }
@@ -172,8 +172,10 @@
   function updateRow(id) {
     btnDisableUpdateRow(id)
     let data = getDataFromRow(id)
+    console.log(data)
     const props = ['tbKtraTX', 'diemThi', 'diemTB', 'hocKy']
     data = deleteEmptyProps(data, props)
+    console.log(data)
     callUpdateSubjectApi(data)
     disableUpdateRowAfterUpdated(id)
   }
