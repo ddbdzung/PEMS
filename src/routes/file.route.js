@@ -5,7 +5,7 @@ const fileController = require('../controllers/file.controller')
 
 router
   .route('/')
-  .get(fileController.exportExcel)
+  .get(fileController.exportExcelInClientSide)
 router
   .route('/f/serverSide')
   .get(fileController.exportDataToExcelInServerSide)

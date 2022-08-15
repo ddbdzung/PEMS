@@ -11,7 +11,7 @@
       url: `/get-value-score`,
       type: 'GET',
       success: function (response) {
-        const { result, diemTrungBinhMonDaTichLuy, tongTinChiDaTichLuy } = response
+        const { tongTinChiAllMonDaQua, tongSoMon, result, diemTrungBinhMonDaTichLuy, tongTinChiDaTichLuy, soMonTichLuyTruot, tongSoMonDaTichLuy } = response // result: diem trung binh chung tich luy
         $('#overall-point-progress').attr('value', result)
         if (result <= 2.5) {
           $('#overall-point-progress').addClass('is-danger')
@@ -19,12 +19,16 @@
           $('#overall-point-progress').addClass('is-warning')
         } else if (result >= 3.2 && result < 3.6) {
           $('#overall-point-progress').addClass('is-success')
-        } else if (result >= 3.6) {
+        } else if (result >= 3.6 && result <= 4) {
           $('#overall-point-progress').addClass('is-primary')
         }
-        $('#modal-overall-point-content li:nth-child(1)').text(`Tổng tín chỉ tích lũy: ${tongTinChiDaTichLuy}`)
-        $('#modal-overall-point-content li:nth-child(2)').text(`Tổng điểm trung bình các môn đã tích lũy: ${diemTrungBinhMonDaTichLuy}`)
-        $('#modal-overall-point-content li:nth-child(3)').text(`Điểm trung bình chung môn đã tích lũy: ${result}`)
+        $('#modal-overall-point-content li:nth-child(1)').text(`Tổng số môn đã và đang học: ${tongSoMon} (Bao gồm môn bị trượt)`)
+        $('#modal-overall-point-content li:nth-child(2)').text(`Tổng số môn được tính tích lũy đã qua môn: ${tongSoMonDaTichLuy}`)
+        $('#modal-overall-point-content li:nth-child(3)').text(`Tổng số môn tích lũy bị trượt: ${soMonTichLuyTruot}`)
+        $('#modal-overall-point-content li:nth-child(4)').text(`Tổng tín chỉ các môn đã qua môn: ${tongTinChiAllMonDaQua}`)
+        $('#modal-overall-point-content li:nth-child(5)').text(`Tổng tín chỉ tích lũy: ${tongTinChiDaTichLuy} (Không bao gồm các môn bị trượt và các môn thi)`)
+        $('#modal-overall-point-content li:nth-child(6)').text(`Tổng điểm trung bình các môn đã tích lũy: ${diemTrungBinhMonDaTichLuy}`)
+        $('#modal-overall-point-content li:nth-child(7)').text(`Điểm trung bình chung môn đã tích lũy: ${result}`)
       },
     })
   }
