@@ -75,10 +75,35 @@ const getDiemTrungBinh = async (req, res) => {
     } else {
     }
   })
+  let soMonTichLuyTruot = 0
+  let tongTinChiAllMonDaQua = 0
+  // let tongTinChiAllMon = 0
+  // let tongTinChiTichLuy = 0
+  // let tongTinChiKhongTichLuy = 0
+  data.forEach(item => {
+    if (item.diemChu === 'F' && item.duocTinhTichLuy) {
+      soMonTichLuyTruot += 1
+    }
+    tongTinChiAllMonDaQua += ((item.diemTrungBinh != 0) ? item.soTinChi : 0)
+    // if (item.diemTichLuy != 0 && item.duocTinhTichLuy) {
+    //   console.log('Hoc phan tinh tich luy', item.tenHP)
+    //   tongTinChiTichLuy += item.soTinChi
+    // } else {
+    //   console.log('Hoc phan khong tinh tich luy', item.tenHP)
+    //   tongTinChiKhongTichLuy += item.soTinChi
+    // }
+  })
+  // console.log('Tong tin chi all mon: ', tongTinChiAllMon);
+  // console.log('Tong tin chi da tich luy', tongTinChiTichLuy);
+  // console.log('Tong tin chi khong tich luy', tongTinChiKhongTichLuy);
+  const tongSoMon = data.length
   res.json({
+    tongSoMon, // Toan bo cac mon da va dang hoc
+    tongTinChiAllMonDaQua,
+    soMonTichLuyTruot,
     diemTrungBinhMonDaTichLuy: diemTrungBinh,
     tongTinChiDaTichLuy: tongTinChi,
-    tongSoMon: count,
+    tongSoMonDaTichLuy: count,
     result: diemTrungBinh * 1.0 / tongTinChi,
   })
 }

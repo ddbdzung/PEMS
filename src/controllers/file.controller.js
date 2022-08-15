@@ -73,8 +73,12 @@ const exportDataToExcelInServerSide = catchAsync(async (req, res) => {
   })
 })
 
-const exportExcel = catchAsync(async (req, res) => {
+const exportExcelInClientSide = catchAsync(async (req, res) => {
   let data = await subjectService.getAllSubjects()
+  Object.assign(data, data.map(subject => {
+    subject.diemChu = subjectService.getAlphabeticalScore(subject)
+    return subject
+  }))
   res.status(httpStatus.OK).send({
     code: httpStatus.OK,
     data,
@@ -82,6 +86,6 @@ const exportExcel = catchAsync(async (req, res) => {
 })
 
 module.exports = {
-  exportExcel,
+  exportExcelInClientSide,
   exportDataToExcelInServerSide,
 }

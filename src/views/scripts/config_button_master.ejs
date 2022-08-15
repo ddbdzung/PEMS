@@ -27,7 +27,7 @@
     var ws = XLSX.utils.json_to_sheet(data,
       {
         origin: 'A2',
-        type: 'tring',
+        type: 'string',
       })
     XLSX.utils.sheet_add_json(ws, [{
       A: 'BẢNG ĐIỂM',
@@ -46,10 +46,11 @@
       type: 'GET',
       success: function (response) {
         var result = formatDataBeforeExportingXlsx(response.data)
+        console.log(result)
         convertDataToXlsx(result)
       },
       error: function (error) {
-        alertFailureTask('Server occurs error!')
+        alertFailureTask('Server occured error!')
       }
     })
   }
