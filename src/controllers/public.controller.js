@@ -47,9 +47,9 @@ const importData = async (req, res) => {
   let { data } = req.body
   try {
     await Subject.create(data)
-    return res.status(200).send('Import data successfully')
+    return res.status(200).send({ message: 'Import data successfully' })
   } catch (e) {
-    return res.status(500).send('Internal server error')
+    return res.status(500).send({ message: 'Internal server error' })
   }
 }
 
