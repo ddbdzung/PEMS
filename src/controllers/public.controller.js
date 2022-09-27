@@ -45,13 +45,6 @@ const exportDataToJSON = async (req, res) => {
 
 const importData = async (req, res) => {
   let { data } = req.body
-  data = data.map(item => {
-    delete item._id
-    delete item.createdAt
-    delete item.updatedAt
-    delete item.__v
-    return item
-  })
   try {
     await Subject.create(data)
     return res.status(200).send('Import data successfully')

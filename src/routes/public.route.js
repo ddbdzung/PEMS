@@ -14,7 +14,7 @@ router
   .get(publicController.getDiemTrungBinh)
 
 router
-  .route('/importData')
+  .route('/import-data')
   .post(validate(publicValidation.importDataValidation), publicController.importData)
 
 router
