@@ -15,7 +15,8 @@ router
 
 router
   .route('/import-data')
-  .post(validate(publicValidation.importDataValidation), publicController.importData)
+  // .post(validate(publicValidation.importDataValidation), publicController.importData)
+  .post(publicController.importData)
 
 router
   .route('/exportDataToJSON')
