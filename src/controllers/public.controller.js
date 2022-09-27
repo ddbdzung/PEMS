@@ -44,7 +44,7 @@ const exportDataToJSON = async (req, res) => {
 }
 
 const importData = async (req, res) => {
-  let data = require('../vendor/data.json')  // Require data file
+  let { data } = req.body
   data = data.map(item => {
     delete item._id
     delete item.createdAt
@@ -52,8 +52,12 @@ const importData = async (req, res) => {
     delete item.__v
     return item
   })
-  await Subject.create(data)
-  return res.send(data)
+  try {
+    await Subject.create(data)
+    return res.status(200).send('Import data successfully')
+  } catch (e) {
+    return res.status(500).send('Internal server error')
+  }
 }
 
 const getDiemTrungBinh = async (req, res) => {

@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const publicController = require('../controllers/public.controller')
+const { publicValidation } = require('../validation')
+const validate = require('../middlewares/validate')
 
 router
   .route('/')
@@ -13,7 +15,7 @@ router
 
 router
   .route('/importData')
-  .get(publicController.importData)
+  .post(validate(publicValidation.importDataValidation), publicController.importData)
 
 router
   .route('/exportDataToJSON')
