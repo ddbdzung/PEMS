@@ -7,4 +7,13 @@ router
   .route('/debug-duplicate-subject')
   .get(testController.debugDuplicatedSubject)
 
+router
+  .route('/')
+  .get(testController.show)
+
+router
+  .route('/log')
+  .get(testController.error)
+
+
 module.exports = router
