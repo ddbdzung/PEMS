@@ -45,8 +45,18 @@ const exportDataToJSON = async (req, res) => {
 
 const importData = async (req, res) => {
   let { data } = req.body
+  const nonValueSubject = [
+    '1303192', 'FL6088', 'DC6004', 'DC6005', 'DC6007', 'DC6006', '1303190', '0903129', '1303191', 'PE6022', 'PE6004', 'PE6017'
+  ]
+  const resolveData = data.map(sub => {
+    if (nonValueSubject.includes(sub.maHP)) {
+      sub.duocTinhTichLuy = false
+    }
+
+    return sub
+  })
   try {
-    await Subject.create(data)
+    await Subject.create(resolveData)
     return res.status(200).send({ message: 'Import data successfully' })
   } catch (e) {
     return res.status(500).send({ message: 'Internal server error' })
