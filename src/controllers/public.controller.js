@@ -13,10 +13,10 @@ const viewHome = async (req, res) => {
 const dropDatabase = async (req, res) => {
   try {
     await Subject.deleteMany({})
-    res.send('Drop database successfully')
+    res.json({ message: 'Drop database successfully' })
   } catch (err) {
     console.log(err)
-    res.status(500).send('Has error')
+    res.status(500).json({ message: 'Has error' })
   }
 }
 

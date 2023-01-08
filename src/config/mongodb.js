@@ -10,7 +10,7 @@ async function connect() {
       });
       console.log('Connect to MongoDB Atlas successfully!');
     } else if (config.env === 'development') {
-      mongoose.connect('mongodb://localhost:27017/pems', {
+      mongoose.connect('mongodb://127.0.0.1:27017/pems', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
