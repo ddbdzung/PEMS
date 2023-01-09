@@ -9,6 +9,10 @@ router
   .get(publicController.viewHome)
 
 router
+  .route('/ping')
+  .get(publicController.ping)
+
+router
   .route('/get-value-score')
   .get(publicController.getDiemTrungBinh)
 
