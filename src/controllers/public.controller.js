@@ -116,7 +116,7 @@ const getDiemTrungBinh = async (req, res) => {
 }
 
 const ping = (req, res) => {
-  return res.status(204)
+  return res.status(204).send()
 }
 
 module.exports = {
