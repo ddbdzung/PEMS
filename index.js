@@ -7,10 +7,13 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+
 const routes = require('./src/routes')
 const config = require('./src/config/config')
 const { connect } = require('./src/config/mongodb')
 const { errorConverter, errorHandler } = require('./src/middlewares/error')
+const implementPrototypes = require('./src/prototypes')
+
 // parse json request body
 app.use(express.json())
 app.use(cors())
@@ -20,6 +23,7 @@ app.use(express.static('./src/public'))
 app.set('view engine', 'ejs')
 app.set('views', './src/views')
 
+implementPrototypes()
 connect()
 
 // Init routes

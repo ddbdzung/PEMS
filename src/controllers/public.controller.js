@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { Subject } = require('../models')
 const { subjectService } = require('../services')
+const { nonValueSubjectId } = require('../constants/nonValueSubject')
 
 const viewHome = async (req, res) => {
   const subject = await Subject.find({})
@@ -46,7 +47,7 @@ const exportDataToJSON = async (req, res) => {
 const importData = async (req, res) => {
   let { data } = req.body
   const nonValueSubject = [
-    '1303192', 'FL6088', 'DC6004', 'DC6005', 'DC6007', 'DC6006', '1303190', '0903129', '1303191', 'PE6022', 'PE6004', 'PE6017'
+    '1303192', 'FL6088', 'DC6004', 'DC6005', 'DC6007', 'DC6006', '1303190', '0903129', '1303191', 'PE6022', 'PE6004', 'PE6017', ...nonValueSubjectId
   ]
   const resolveData = data.map(sub => {
     if (nonValueSubject.includes(sub.maHP)) {
